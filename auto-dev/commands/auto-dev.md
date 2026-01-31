@@ -182,10 +182,13 @@ If `blocked`: Fix critical issues first, then re-run review
 
 ### Phase 7: MERGE
 
-Before merging, run pre-merge checks:
+#### Step 1: Pre-Merge Checks
+
 ```bash
 "${CLAUDE_PLUGIN_ROOT}/scripts/pre-merge-checks.sh" <pr_number>
 ```
+
+#### Step 2: Merge (if auto-merge enabled)
 
 If all checks pass and `--auto-merge` was set:
 ```bash
@@ -194,11 +197,45 @@ gh pr merge <pr_number> --squash --delete-branch
 
 Otherwise, report ready status and wait for human approval.
 
+#### Step 3: Cleanup (after successful merge)
+
+After merge completes successfully:
+
+1. **Remove worktree** (if one was created):
+   ```bash
+   # Get worktree path from state file
+   WORKTREE_PATH=$(grep 'worktree_path:' .claude/auto-dev.local.md | sed 's/.*: "//' | sed 's/"//')
+
+   # If not current directory, remove the worktree
+   if [[ "$WORKTREE_PATH" != "." ]]; then
+     cd "$(git rev-parse --show-toplevel)"  # Return to main repo
+     git worktree remove "$WORKTREE_PATH" --force 2>/dev/null || true
+     echo "Removed worktree: $WORKTREE_PATH"
+   fi
+   ```
+
+2. **Clean up review artifacts**:
+   ```bash
+   rm -rf .claude/reviews/
+   ```
+
+3. **Archive state file** (optional):
+   ```bash
+   # Move to completed sessions archive
+   mkdir -p .claude/auto-dev-archive/
+   mv .claude/auto-dev.local.md ".claude/auto-dev-archive/$(date +%Y%m%d-%H%M%S).md"
+   ```
+
+4. **Remove context file**:
+   ```bash
+   rm -f .claude/auto-dev-context.md
+   ```
+
 ---
 
 ## Completion
 
-When all phases complete successfully, output:
+When all phases complete successfully (including cleanup), output:
 
 ```
 <promise>AUTO-DEV COMPLETE</promise>
@@ -207,7 +244,8 @@ When all phases complete successfully, output:
 **CRITICAL:** Only output this when the feature is truly complete:
 - All code implemented
 - All tests passing
-- PR created (and merged if auto-merge enabled)
+- PR created and merged (or ready for manual merge)
+- Worktree cleaned up (if applicable)
 - No outstanding issues
 
 Do NOT output false completion promises to exit the loop.
