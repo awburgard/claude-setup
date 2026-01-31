@@ -13,35 +13,62 @@ Autonomous development orchestrator for Claude Code with intelligent specialist 
 
 ## Installation
 
-### Quick Install
+### Quick Start
 
 ```bash
-# Clone or download this plugin
-git clone <repo-url>
-cd auto-dev
+# 1. Clone the repo (or fork it first on GitHub)
+git clone https://github.com/awburgard/claude-setup.git
+cd claude-setup
 
-# Run setup to check dependencies
-./setup.sh
+# 2. Check dependencies
+./auto-dev/setup.sh
+
+# 3. Run Claude with the plugin
+claude --plugin-dir ~/path/to/claude-setup
+
+# 4. In your project directory, start auto-dev
+/auto-dev:auto-dev "your feature description"
 ```
 
-### Using the Plugin
+### Step-by-Step
+
+1. **Clone or fork the repo:**
+   ```bash
+   git clone https://github.com/awburgard/claude-setup.git ~/claude-setup
+   ```
+
+2. **Check dependencies:**
+   ```bash
+   cd ~/claude-setup/auto-dev
+   ./setup.sh
+   ```
+   This shows which plugins/agents you have and which are missing.
+
+3. **Navigate to your project:**
+   ```bash
+   cd ~/your-project
+   ```
+
+4. **Run Claude with the plugin:**
+   ```bash
+   claude --plugin-dir ~/claude-setup
+   ```
+
+5. **Start auto-dev:**
+   ```
+   /auto-dev:auto-dev "Add user authentication"
+   /auto-dev:auto-dev "#42"  # GitHub issue
+   ```
+
+### Shell Alias (Recommended)
+
+Add to your `~/.zshrc` or `~/.bashrc`:
 
 ```bash
-# Run Claude with the plugin directory
-claude --plugin-dir /path/to/auto-dev
-
-# Or create a shell alias for convenience
-alias claude-dev='claude --plugin-dir /path/to/auto-dev'
+alias claude-dev='claude --plugin-dir ~/claude-setup'
 ```
 
-### Per-Project Setup
-
-For projects that need the plugin regularly, add to your shell profile:
-
-```bash
-# In ~/.zshrc or ~/.bashrc
-export CLAUDE_PLUGIN_DIRS="/path/to/auto-dev"
-```
+Then just run `claude-dev` from any project directory.
 
 ## Dependencies
 
