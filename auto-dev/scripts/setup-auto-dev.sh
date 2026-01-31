@@ -48,6 +48,17 @@ EXAMPLES:
   /auto-dev "Fix checkout bug" --no-worktree
   /auto-dev "Add dark mode" --auto-merge
 
+  # GitHub issue integration (auto-detected)
+  /auto-dev "#42"                    # Fetches issue #42 details
+  /auto-dev "Implement #42 and #43"  # Fetches multiple issues
+
+CONTEXT AUTO-DISCOVERY:
+  Auto-dev automatically detects and loads:
+  - GitHub issues (#123 references, requires gh CLI)
+  - CLAUDE.md project conventions
+  - Design docs in docs/ folder
+  - Custom config (.claude/auto-dev.config.yml)
+
 MONITORING:
   /auto-dev-status  # Show current phase and progress
 
@@ -182,6 +193,18 @@ Initialize project detection and begin planning phase.
 ${FEATURE_NAME}
 EOF
 
+# Get script directory for loading context script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Load project context (GitHub issues, CLAUDE.md, design docs)
+echo "Discovering project context..." >&2
+CONTEXT_RESULT=$("$SCRIPT_DIR/load-context.sh" "$FEATURE_NAME" ".claude/auto-dev-context.md" 2>&1 | tail -1)
+
+# Parse context discovery results
+CONTEXT_SOURCES=$(echo "$CONTEXT_RESULT" | jq -r '.discovered | join(", ")' 2>/dev/null || echo "none")
+HAS_ISSUES=$(echo "$CONTEXT_RESULT" | jq -r '.has_github_issues' 2>/dev/null || echo "false")
+DOCS_COUNT=$(echo "$CONTEXT_RESULT" | jq -r '.docs_found' 2>/dev/null || echo "0")
+
 # Output setup message
 cat <<EOF
 Auto-Dev session initialized!
@@ -191,6 +214,7 @@ Feature: ${FEATURE_NAME}
 Worktree: ${WORKTREE_PATH}
 Max iterations: ${MAX_ITERATIONS}
 Auto-merge: ${AUTO_MERGE}
+Context sources: ${CONTEXT_SOURCES:-none}
 
 PHASE 1: SETUP
 - Detect project stack and complexity
@@ -209,8 +233,19 @@ echo ""
 echo "Feature to build: ${FEATURE_NAME}"
 echo ""
 echo "Begin by:"
-echo "1. Run detect-project.sh to analyze the codebase"
-echo "2. Update state file with detected stack and complexity"
-echo "3. Invoke superpowers:brainstorming skill for planning phase"
-echo "4. Create implementation plan using superpowers:writing-plans skill"
-echo "5. Execute plan with appropriate specialist delegation"
+echo "1. Read .claude/auto-dev-context.md for discovered project context"
+echo "2. Run detect-project.sh to analyze the codebase"
+echo "3. Update state file with detected stack and complexity"
+echo "4. Invoke superpowers:brainstorming skill for planning phase"
+echo "5. Create implementation plan using superpowers:writing-plans skill"
+echo "6. Execute plan with appropriate specialist delegation"
+
+# Show context summary if any was discovered
+if [[ "$CONTEXT_SOURCES" != "none" ]] && [[ -n "$CONTEXT_SOURCES" ]]; then
+  echo ""
+  echo "Discovered context:"
+  [[ "$HAS_ISSUES" == "true" ]] && echo "  - GitHub issue details loaded"
+  [[ -f "CLAUDE.md" ]] && echo "  - CLAUDE.md project conventions"
+  [[ "$DOCS_COUNT" -gt 0 ]] && echo "  - $DOCS_COUNT design doc(s) found"
+  [[ -f ".claude/auto-dev.config.yml" ]] && echo "  - Custom project config"
+fi

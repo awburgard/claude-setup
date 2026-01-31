@@ -8,6 +8,7 @@ Autonomous development orchestrator for Claude Code with intelligent specialist 
 - **Intelligent Delegation**: Automatically routes tasks to specialist agents based on project complexity
 - **Multi-Agent Review**: 4 reviewers run in parallel with voting-based consensus
 - **Mobile Support**: Native Expo, React Native, and Supabase integration
+- **Context Auto-Discovery**: Automatically loads GitHub issues, CLAUDE.md, and design docs
 - **Loop Automation**: Continues until completion or max iterations
 
 ## Installation
@@ -21,15 +22,26 @@ cd auto-dev
 
 # Run setup to check dependencies
 ./setup.sh
-
-# Install the plugin
-claude plugins install --path .
 ```
 
-### Manual Install
+### Using the Plugin
 
-1. Copy the `auto-dev` folder to your plugins directory
-2. Run `claude plugins install --path /path/to/auto-dev`
+```bash
+# Run Claude with the plugin directory
+claude --plugin-dir /path/to/auto-dev
+
+# Or create a shell alias for convenience
+alias claude-dev='claude --plugin-dir /path/to/auto-dev'
+```
+
+### Per-Project Setup
+
+For projects that need the plugin regularly, add to your shell profile:
+
+```bash
+# In ~/.zshrc or ~/.bashrc
+export CLAUDE_PLUGIN_DIRS="/path/to/auto-dev"
+```
 
 ## Dependencies
 
@@ -82,6 +94,10 @@ You can install community agents from [awesome-claude-code-subagents](https://gi
 /auto-dev "Build REST API" --max-iterations 50
 /auto-dev "Fix login bug" --no-worktree
 /auto-dev "Add dark mode" --auto-merge
+
+# GitHub issue integration (requires gh CLI)
+/auto-dev "#42"                      # Fetches and implements issue #42
+/auto-dev "Implement #42 and #43"    # Multiple issues
 ```
 
 ### Check Status
@@ -97,6 +113,46 @@ You can install community agents from [awesome-claude-code-subagents](https://gi
 | `--max-iterations N` | Maximum loop iterations | 100 |
 | `--no-worktree` | Work in current directory | Creates worktree |
 | `--auto-merge` | Auto-merge on review approval | Manual merge |
+
+## Context Auto-Discovery
+
+Auto-dev automatically discovers and loads project context to inform planning:
+
+### GitHub Issues
+
+If `gh` CLI is installed and authenticated, referencing issue numbers (`#123`) in your prompt automatically fetches:
+- Issue title and description
+- Labels and state
+- Comments
+
+```bash
+/auto-dev "#42"  # Loads full issue context before planning
+```
+
+### Project Conventions
+
+Auto-dev looks for and loads:
+- `CLAUDE.md` - Project-specific Claude instructions
+- `.claude/CLAUDE.md` - Alternative location
+
+### Design Documents
+
+Scans common locations for design docs:
+- `docs/DESIGN*.md`, `docs/ARCHITECTURE*.md`
+- `docs/STYLE*.md`, `docs/SCOPES*.yml`
+- `CONTRIBUTING.md`, `TODO.md`
+
+### Custom Configuration
+
+For projects with specific needs, create `.claude/auto-dev.config.yml`:
+
+```yaml
+# .claude/auto-dev.config.yml
+task_file: docs/SCOPES.yml     # Custom task definitions
+design_docs:
+  - docs/DESIGN.md
+  - docs/STYLE_GUIDE.md
+```
 
 ## How It Works
 

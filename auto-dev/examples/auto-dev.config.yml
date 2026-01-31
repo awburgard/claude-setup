@@ -1,0 +1,38 @@
+# Auto-Dev Project Configuration
+# Place this file at: .claude/auto-dev.config.yml
+#
+# This file is optional. Auto-dev works without it by auto-discovering
+# context from common locations. Use this for custom project structures.
+
+# Custom task definitions file (optional)
+# Supports YAML or Markdown files with task definitions
+# task_file: docs/SCOPES.yml
+
+# Design documents to load during planning (optional)
+# These will be read and included in the planning context
+# design_docs:
+#   - docs/DESIGN.md
+#   - docs/ARCHITECTURE.md
+#   - docs/STYLE_GUIDE.md
+
+# Default options (optional)
+# These are applied unless overridden on command line
+# defaults:
+#   max_iterations: 50
+#   auto_merge: false
+#   no_worktree: false
+
+# Specialist overrides (optional)
+# Map task types to specific agents
+# specialists:
+#   database: postgres-pro
+#   mobile: mobile-developer
+#   api: api-designer
+
+# Skip patterns (optional)
+# Files/folders to ignore during exploration
+# skip_patterns:
+#   - node_modules
+#   - .git
+#   - dist
+#   - build
