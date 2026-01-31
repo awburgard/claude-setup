@@ -11,16 +11,6 @@
         "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
       }
     ],
-    "context7@claude-plugins-official": [
-      {
-        "scope": "user",
-        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/context7/27d2b86d72da",
-        "version": "27d2b86d72da",
-        "installedAt": "2026-01-31T13:46:45.179Z",
-        "lastUpdated": "2026-01-31T13:46:45.179Z",
-        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
-      }
-    ],
     "feature-dev@claude-plugins-official": [
       {
         "scope": "user",
@@ -97,7 +87,7 @@
         "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/superpowers/4.1.1",
         "version": "4.1.1",
         "installedAt": "2026-01-31T13:47:21.589Z",
-        "lastUpdated": "2026-01-31T13:47:21.589Z",
+        "lastUpdated": "2026-01-31T14:02:56.189Z",
         "gitCommitSha": "06b92f36820f38175b2ed6ff3f8df45157d54731"
       }
     ],
@@ -127,7 +117,7 @@
         "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/figma/1.0.0",
         "version": "1.0.0",
         "installedAt": "2026-01-31T13:47:37.280Z",
-        "lastUpdated": "2026-01-31T13:47:37.280Z",
+        "lastUpdated": "2026-01-31T14:02:56.167Z",
         "gitCommitSha": "20aca44ee6ba6092037e943c151c067896828360"
       }
     ],
@@ -169,6 +159,26 @@
         "installedAt": "2026-01-31T13:54:37.087Z",
         "lastUpdated": "2026-01-31T13:54:37.087Z",
         "gitCommitSha": "b631a6045b421c425df947af74d3f6007e6ccc69"
+      }
+    ],
+    "agent-sdk-dev@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/agent-sdk-dev/27d2b86d72da",
+        "version": "27d2b86d72da",
+        "installedAt": "2026-01-31T14:00:49.069Z",
+        "lastUpdated": "2026-01-31T14:00:49.069Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "plugin-dev@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/plugin-dev/27d2b86d72da",
+        "version": "27d2b86d72da",
+        "installedAt": "2026-01-31T14:00:58.242Z",
+        "lastUpdated": "2026-01-31T14:00:58.242Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
       }
     ]
   }

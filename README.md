@@ -7,6 +7,13 @@ Personal backup of Claude Code configuration including agents, plugins, and sett
 ```
 claude-setup/
 ├── agents/                    # 34 custom agent definitions
+├── auto-dev/                  # Custom auto-dev plugin
+│   ├── .claude-plugin/
+│   ├── agents/
+│   ├── commands/
+│   ├── hooks/
+│   ├── scripts/
+│   └── skills/
 ├── plugins/
 │   ├── installed_plugins.json # Plugin installation manifest
 │   └── known_marketplaces.json
@@ -18,25 +25,29 @@ claude-setup/
 ## Installed Plugins
 
 ### Official Plugins (claude-plugins-official)
-- `frontend-design` - Frontend design skill
-- `context7` - Context management
-- `feature-dev` - Feature development workflow
-- `code-review` - Code review skill
-- `ralph-loop` - Ralph loop automation
-- `code-simplifier` - Code simplification
-- `typescript-lsp` - TypeScript language server
-- `commit-commands` - Git commit helpers
-- `security-guidance` - Security best practices
-- `superpowers` - Enhanced skills and workflows
-- `pr-review-toolkit` - PR review agents
-- `supabase` - Supabase integration
-- `figma` - Figma design integration
+- `agent-sdk-dev` - Agent SDK development tools
 - `atlassian` - Jira/Confluence integration
+- `code-review` - Code review skill
+- `code-simplifier` - Code simplification
+- `commit-commands` - Git commit helpers
+- `feature-dev` - Feature development workflow
+- `figma` - Figma design integration
+- `frontend-design` - Frontend design skill
 - `greptile` - Code search and review
+- `plugin-dev` - Plugin development tools
+- `pr-review-toolkit` - PR review agents
+- `ralph-loop` - Ralph loop automation
+- `security-guidance` - Security best practices
+- `supabase` - Supabase integration
+- `superpowers` - Enhanced skills and workflows
+- `typescript-lsp` - TypeScript language server
 
 ### Expo Plugins (expo-plugins)
 - `expo-app-design` - Expo app development skills
 - `upgrading-expo` - Expo SDK upgrade assistance
+
+### Custom Plugins (local)
+- `auto-dev` - Autonomous development orchestrator with 7-phase workflow, intelligent specialist delegation, and multi-agent review battles
 
 ## Agents (34 total)
 
@@ -103,24 +114,33 @@ claude-setup/
    claude plugins add-marketplace https://github.com/anthropics/claude-plugins-official
    claude plugins add-marketplace https://github.com/expo/expo-plugins
 
-   # Install each plugin
-   claude plugins install frontend-design@claude-plugins-official
-   claude plugins install context7@claude-plugins-official
-   claude plugins install feature-dev@claude-plugins-official
-   claude plugins install code-review@claude-plugins-official
-   claude plugins install ralph-loop@claude-plugins-official
-   claude plugins install code-simplifier@claude-plugins-official
-   claude plugins install typescript-lsp@claude-plugins-official
-   claude plugins install commit-commands@claude-plugins-official
-   claude plugins install security-guidance@claude-plugins-official
-   claude plugins install superpowers@claude-plugins-official
-   claude plugins install pr-review-toolkit@claude-plugins-official
-   claude plugins install supabase@claude-plugins-official
-   claude plugins install figma@claude-plugins-official
+   # Install official plugins
+   claude plugins install agent-sdk-dev@claude-plugins-official
    claude plugins install atlassian@claude-plugins-official
+   claude plugins install code-review@claude-plugins-official
+   claude plugins install code-simplifier@claude-plugins-official
+   claude plugins install commit-commands@claude-plugins-official
+   claude plugins install feature-dev@claude-plugins-official
+   claude plugins install figma@claude-plugins-official
+   claude plugins install frontend-design@claude-plugins-official
    claude plugins install greptile@claude-plugins-official
+   claude plugins install plugin-dev@claude-plugins-official
+   claude plugins install pr-review-toolkit@claude-plugins-official
+   claude plugins install ralph-loop@claude-plugins-official
+   claude plugins install security-guidance@claude-plugins-official
+   claude plugins install supabase@claude-plugins-official
+   claude plugins install superpowers@claude-plugins-official
+   claude plugins install typescript-lsp@claude-plugins-official
+
+   # Install expo plugins
    claude plugins install expo-app-design@expo-plugins
    claude plugins install upgrading-expo@expo-plugins
+   ```
+
+4. **Install custom auto-dev plugin:**
+   ```bash
+   # Link the auto-dev plugin from this repo
+   claude plugins install --path ./auto-dev
    ```
 
 ## Backup Date
