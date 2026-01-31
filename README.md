@@ -137,10 +137,13 @@ claude-setup/
    claude plugins install upgrading-expo@expo-plugins
    ```
 
-4. **Install custom auto-dev plugin:**
+4. **Use custom auto-dev plugin:**
    ```bash
-   # Link the auto-dev plugin from this repo
-   claude plugins install --path ./auto-dev
+   # Run Claude with the plugin directory
+   claude --plugin-dir /path/to/claude-setup
+
+   # Or add a shell alias for convenience (add to ~/.zshrc or ~/.bashrc)
+   alias claude-dev='claude --plugin-dir ~/claude-setup'
    ```
 
 ## Backup Date
