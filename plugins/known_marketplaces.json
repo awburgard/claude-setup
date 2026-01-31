@@ -1,0 +1,18 @@
+{
+  "claude-plugins-official": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official"
+    },
+    "installLocation": "/Users/austin.burgard/.claude/plugins/marketplaces/claude-plugins-official",
+    "lastUpdated": "2026-01-31T13:55:46.932Z"
+  },
+  "expo-plugins": {
+    "source": {
+      "source": "github",
+      "repo": "expo/skills"
+    },
+    "installLocation": "/Users/austin.burgard/.claude/plugins/marketplaces/expo-plugins",
+    "lastUpdated": "2026-01-31T13:54:10.585Z"
+  }
+}

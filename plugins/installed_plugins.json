@@ -1,0 +1,175 @@
+{
+  "version": 2,
+  "plugins": {
+    "frontend-design@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/frontend-design/27d2b86d72da",
+        "version": "27d2b86d72da",
+        "installedAt": "2026-01-31T13:46:40.509Z",
+        "lastUpdated": "2026-01-31T13:46:40.509Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "context7@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/context7/27d2b86d72da",
+        "version": "27d2b86d72da",
+        "installedAt": "2026-01-31T13:46:45.179Z",
+        "lastUpdated": "2026-01-31T13:46:45.179Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "feature-dev@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/feature-dev/27d2b86d72da",
+        "version": "27d2b86d72da",
+        "installedAt": "2026-01-31T13:46:49.634Z",
+        "lastUpdated": "2026-01-31T13:46:49.634Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "code-review@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/code-review/27d2b86d72da",
+        "version": "27d2b86d72da",
+        "installedAt": "2026-01-31T13:46:53.656Z",
+        "lastUpdated": "2026-01-31T13:46:53.656Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "ralph-loop@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/ralph-loop/27d2b86d72da",
+        "version": "27d2b86d72da",
+        "installedAt": "2026-01-31T13:46:57.141Z",
+        "lastUpdated": "2026-01-31T13:46:57.141Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "code-simplifier@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/code-simplifier/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-01-31T13:47:00.927Z",
+        "lastUpdated": "2026-01-31T13:47:00.927Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "typescript-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/typescript-lsp/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-01-31T13:47:05.527Z",
+        "lastUpdated": "2026-01-31T13:47:05.527Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "commit-commands@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/commit-commands/27d2b86d72da",
+        "version": "27d2b86d72da",
+        "installedAt": "2026-01-31T13:47:12.118Z",
+        "lastUpdated": "2026-01-31T13:47:12.118Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "security-guidance@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/security-guidance/27d2b86d72da",
+        "version": "27d2b86d72da",
+        "installedAt": "2026-01-31T13:47:17.135Z",
+        "lastUpdated": "2026-01-31T13:47:17.135Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "superpowers@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/superpowers/4.1.1",
+        "version": "4.1.1",
+        "installedAt": "2026-01-31T13:47:21.589Z",
+        "lastUpdated": "2026-01-31T13:47:21.589Z",
+        "gitCommitSha": "06b92f36820f38175b2ed6ff3f8df45157d54731"
+      }
+    ],
+    "pr-review-toolkit@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/pr-review-toolkit/27d2b86d72da",
+        "version": "27d2b86d72da",
+        "installedAt": "2026-01-31T13:47:26.292Z",
+        "lastUpdated": "2026-01-31T13:47:26.292Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "supabase@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/supabase/27d2b86d72da",
+        "version": "27d2b86d72da",
+        "installedAt": "2026-01-31T13:47:31.137Z",
+        "lastUpdated": "2026-01-31T13:47:31.137Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "figma@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/figma/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-01-31T13:47:37.280Z",
+        "lastUpdated": "2026-01-31T13:47:37.280Z",
+        "gitCommitSha": "20aca44ee6ba6092037e943c151c067896828360"
+      }
+    ],
+    "atlassian@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/atlassian/7caef65e1070",
+        "version": "7caef65e1070",
+        "installedAt": "2026-01-31T13:47:44.164Z",
+        "lastUpdated": "2026-01-31T13:47:44.164Z",
+        "gitCommitSha": "7caef65e1070f5219efa018fa0b1023738dbd56b"
+      }
+    ],
+    "greptile@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/claude-plugins-official/greptile/27d2b86d72da",
+        "version": "27d2b86d72da",
+        "installedAt": "2026-01-31T13:47:53.963Z",
+        "lastUpdated": "2026-01-31T13:47:53.963Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "expo-app-design@expo-plugins": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/expo-plugins/expo-app-design/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-01-31T13:54:23.307Z",
+        "lastUpdated": "2026-01-31T13:54:23.307Z",
+        "gitCommitSha": "b631a6045b421c425df947af74d3f6007e6ccc69"
+      }
+    ],
+    "upgrading-expo@expo-plugins": [
+      {
+        "scope": "user",
+        "installPath": "/Users/austin.burgard/.claude/plugins/cache/expo-plugins/upgrading-expo/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-01-31T13:54:37.087Z",
+        "lastUpdated": "2026-01-31T13:54:37.087Z",
+        "gitCommitSha": "b631a6045b421c425df947af74d3f6007e6ccc69"
+      }
+    ]
+  }
+}
