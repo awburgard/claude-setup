@@ -119,6 +119,14 @@ Update state with PR number: `phases.PR_CREATION.result.pr_number`
 
 ### Phase 6: REVIEW (Review Battle)
 
+#### Step 1: Create Review Directory
+
+```bash
+mkdir -p .claude/reviews/round-<N>
+```
+
+#### Step 2: Launch Review Agents
+
 Launch 4 review agents in parallel using the Task tool:
 
 ```
@@ -130,7 +138,36 @@ Task(pr-review-toolkit:pr-test-analyzer, "Review PR #N for test coverage")
 
 **IMPORTANT:** Dispatch all 4 agents in a SINGLE message with multiple Task tool calls.
 
-After agents complete, run vote aggregation:
+#### Step 3: Collect Votes
+
+After each agent completes, create a JSON file for their review:
+
+```bash
+# For each reviewer, create a JSON file based on their output
+# Use this format:
+cat > .claude/reviews/round-<N>/<reviewer-name>.json <<'EOF'
+{
+  "reviewer": "<reviewer-name>",
+  "vote": "approve" | "reject",
+  "issues": [
+    {
+      "severity": "critical" | "major" | "minor",
+      "description": "<issue description>",
+      "file": "<file path if applicable>"
+    }
+  ],
+  "summary": "<brief summary of review>"
+}
+EOF
+```
+
+**Interpreting agent output:**
+- "approve" if: No critical issues found, code quality acceptable
+- "reject" if: Critical bugs, security issues, or major problems found
+- List all issues with severity (critical blocks merge, major/minor don't)
+
+#### Step 4: Aggregate Votes
+
 ```bash
 "${CLAUDE_PLUGIN_ROOT}/scripts/aggregate-votes.sh" <round_number>
 ```
@@ -140,8 +177,8 @@ After agents complete, run vote aggregation:
 - Any critical issue = blocks even with majority approval
 - Max 5 review rounds before human escalation
 
-If `needs-fixes`: Address issues and re-run review round
-If `blocked`: Fix critical issues first
+If `needs-fixes`: Address issues and re-run review round (increment round number)
+If `blocked`: Fix critical issues first, then re-run review
 
 ### Phase 7: MERGE
 
