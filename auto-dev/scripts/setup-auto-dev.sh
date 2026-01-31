@@ -120,6 +120,12 @@ FEATURE_SLUG=$(echo "$FEATURE_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | 
 # Get repo name from current directory
 REPO_NAME=$(basename "$(git rev-parse --show-toplevel 2>/dev/null || pwd)")
 
+# Get current branch for base
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
+
+# Generate branch name
+BRANCH_NAME="auto-dev/${FEATURE_SLUG}"
+
 # Determine worktree path
 if [[ "$NO_WORKTREE" == "true" ]]; then
   WORKTREE_PATH="."
@@ -127,14 +133,23 @@ else
   WORKTREE_PATH="../${REPO_NAME}-ad-${FEATURE_SLUG}-${SESSION_ID: -4}"
 fi
 
-# Get current branch for worktree base
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
-
-# Create worktree if requested
-if [[ "$NO_WORKTREE" == "false" ]]; then
-  BRANCH_NAME="auto-dev/${FEATURE_SLUG}"
-
-  # Check if branch already exists
+# Create branch (and optionally worktree)
+if [[ "$NO_WORKTREE" == "true" ]]; then
+  # No worktree: create branch and check it out in current directory
+  if git show-ref --verify --quiet "refs/heads/${BRANCH_NAME}"; then
+    echo "Warning: Branch ${BRANCH_NAME} already exists, switching to it" >&2
+    git checkout "$BRANCH_NAME" 2>/dev/null || {
+      echo "Error: Failed to checkout branch $BRANCH_NAME" >&2
+      exit 1
+    }
+  else
+    git checkout -b "$BRANCH_NAME" "$CURRENT_BRANCH" 2>/dev/null || {
+      echo "Error: Failed to create branch $BRANCH_NAME" >&2
+      exit 1
+    }
+  fi
+else
+  # With worktree: create branch in separate directory
   if git show-ref --verify --quiet "refs/heads/${BRANCH_NAME}"; then
     echo "Warning: Branch ${BRANCH_NAME} already exists, using existing branch" >&2
     git worktree add "$WORKTREE_PATH" "$BRANCH_NAME" 2>/dev/null || {
@@ -158,6 +173,8 @@ cat > .claude/auto-dev.local.md <<EOF
 version: 1
 session_id: "${SESSION_ID}"
 feature_name: "${FEATURE_NAME}"
+branch_name: "${BRANCH_NAME}"
+base_branch: "${CURRENT_BRANCH}"
 worktree_path: "${WORKTREE_PATH}"
 current_phase: "SETUP"
 phase_status: "in_progress"
