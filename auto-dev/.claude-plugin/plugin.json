@@ -1,0 +1,8 @@
+{
+  "name": "auto-dev",
+  "version": "0.1.0",
+  "description": "Autonomous development orchestrator with intelligent delegation, PR creation, and multi-agent review battles",
+  "author": {
+    "name": "Austin Burgard"
+  }
+}
