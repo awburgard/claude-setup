@@ -22,6 +22,9 @@ This skill guides intelligent delegation and coordination during autonomous deve
 | **Frontend** | Complex UI, animations, accessibility | `frontend-developer` | Simple styling changes |
 | **Backend** | Business logic, integrations, caching | `backend-developer` | Simple route handlers |
 | **Exploration** | Understanding large codebases | `feature-dev:code-explorer` | Small, focused searches |
+| **Mobile/Expo** | Navigation, native APIs, platform-specific | `mobile-developer` | Simple UI tweaks |
+| **React Native** | Native modules, performance, gestures | `mobile-app-developer` | Basic React components |
+| **Supabase** | Auth, realtime, edge functions | Use Supabase MCP tools | Simple queries |
 
 ## Complexity Thresholds
 
@@ -60,6 +63,48 @@ Based on the `complexity_score` from project detection (1-10):
 - Simple CRUD operations
 - Bug fixes in isolated code
 - Documentation updates
+
+## Mobile Development Rules
+
+When detected stack includes `expo`, `react-native`, or mobile patterns:
+
+### Expo Projects
+
+**Always invoke skills for:**
+- Navigation setup → `expo-app-design:building-native-ui`
+- Data fetching → `expo-app-design:native-data-fetching`
+- API routes → `expo-app-design:expo-api-routes`
+- Dev builds → `expo-app-design:expo-dev-client`
+- Styling setup → `expo-app-design:expo-tailwind-setup`
+- SDK upgrades → `upgrading-expo:upgrading-expo`
+
+**Delegate to specialists:**
+- Complex navigation patterns → `mobile-developer`
+- Platform-specific features → `mobile-app-developer`
+- Performance optimization → `mobile-developer`
+- Native module integration → `mobile-app-developer`
+
+### Supabase Projects
+
+**Use MCP tools for:**
+- Schema design → `mcp__plugin_supabase_supabase__apply_migration`
+- Query execution → `mcp__plugin_supabase_supabase__execute_sql`
+- Edge functions → `mcp__plugin_supabase_supabase__deploy_edge_function`
+- Project setup → `mcp__plugin_supabase_supabase__get_project_url`
+
+**Load tools with ToolSearch:**
+```
+ToolSearch(query: "+supabase execute")
+ToolSearch(query: "+supabase migration")
+```
+
+### Mobile + Supabase Integration
+
+Common patterns:
+1. Auth → Supabase Auth + Expo SecureStore
+2. Realtime → Supabase Realtime subscriptions
+3. Storage → Supabase Storage + Expo FileSystem
+4. Push notifications → Supabase + Expo Notifications
 
 ## Phase Transition Checklist
 

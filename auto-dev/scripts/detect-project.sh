@@ -34,6 +34,34 @@ if [[ -f "package.json" ]] && grep -q '"next"' package.json 2>/dev/null; then
   COMPLEXITY_FACTORS=$((COMPLEXITY_FACTORS + 2))
 fi
 
+# Detect Expo
+if [[ -f "app.json" ]] && grep -q '"expo"' app.json 2>/dev/null; then
+  STACK+=("expo")
+  PATTERNS+=("mobile")
+  COMPLEXITY_FACTORS=$((COMPLEXITY_FACTORS + 2))
+
+  # Check for Expo Router
+  if [[ -f "package.json" ]] && grep -q '"expo-router"' package.json 2>/dev/null; then
+    PATTERNS+=("expo-router")
+  fi
+fi
+
+# Detect React Native (without Expo)
+if [[ -f "package.json" ]] && grep -q '"react-native"' package.json 2>/dev/null; then
+  if [[ ! " ${STACK[*]} " =~ " expo " ]]; then
+    STACK+=("react-native")
+    PATTERNS+=("mobile")
+    COMPLEXITY_FACTORS=$((COMPLEXITY_FACTORS + 2))
+  fi
+fi
+
+# Detect Supabase
+if [[ -f "package.json" ]] && grep -q '"@supabase/supabase-js"' package.json 2>/dev/null; then
+  STACK+=("supabase")
+  PATTERNS+=("baas")
+  COMPLEXITY_FACTORS=$((COMPLEXITY_FACTORS + 1))
+fi
+
 # Detect TypeScript
 if [[ -f "tsconfig.json" ]]; then
   STACK+=("typescript")

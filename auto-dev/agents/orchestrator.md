@@ -19,6 +19,16 @@ description: |
   user: "Fix the checkout total calculation bug"
   assistant: Uses systematic-debugging skill, identifies root cause, implements fix with test coverage
   </example>
+  <example>
+  Context: User is building a mobile app with Expo
+  user: "Add push notifications to the app"
+  assistant: Detects Expo stack, invokes expo-app-design:building-native-ui skill, delegates to mobile-developer for implementation
+  </example>
+  <example>
+  Context: User has Supabase backend
+  user: "Create a new users table with auth"
+  assistant: Detects Supabase, uses Supabase MCP tools for schema migration, integrates with existing auth patterns
+  </example>
 model: opus
 tools: ["Bash", "Glob", "Grep", "Read", "Write", "Edit", "Task", "TaskCreate", "TaskUpdate", "TaskList"]
 color: purple
@@ -87,17 +97,23 @@ Actions:
 **Delegation Decision Tree:**
 
 ```
-Is this a React component?
-├─ Yes → Does it involve complex state?
-│        ├─ Yes → Delegate to react-specialist
-│        └─ No → Handle directly
-└─ No → Is this TypeScript with generics?
-         ├─ Yes → Delegate to typescript-pro
-         └─ No → Is this database work?
-                  ├─ Yes → Delegate to postgres-pro
-                  └─ No → Is this security-sensitive?
-                           ├─ Yes → Delegate to security-engineer
-                           └─ No → Handle directly or use backend-developer
+Is this mobile/Expo work?
+├─ Yes → Is it navigation or native UI?
+│        ├─ Yes → Invoke expo-app-design:building-native-ui, delegate to mobile-developer
+│        └─ No → Is it data fetching/offline?
+│                 ├─ Yes → Invoke expo-app-design:native-data-fetching
+│                 └─ No → Delegate to mobile-app-developer
+└─ No → Is this a React component?
+         ├─ Yes → Does it involve complex state?
+         │        ├─ Yes → Delegate to react-specialist
+         │        └─ No → Handle directly
+         └─ No → Is this TypeScript with generics?
+                  ├─ Yes → Delegate to typescript-pro
+                  └─ No → Is this database/Supabase work?
+                           ├─ Yes → Use Supabase MCP tools or postgres-pro
+                           └─ No → Is this security-sensitive?
+                                    ├─ Yes → Delegate to security-engineer
+                                    └─ No → Handle directly or use backend-developer
 ```
 
 Transition when: All tasks complete, tests passing
@@ -172,6 +188,30 @@ Transition when: Merged OR awaiting human approval
 | `backend-developer` | API routes, business logic, integrations |
 | `frontend-developer` | UI components, styling, accessibility |
 | `api-designer` | REST/GraphQL API design, documentation |
+| `mobile-developer` | React Native/Expo apps, cross-platform mobile |
+| `mobile-app-developer` | Native mobile features, platform-specific code |
+
+## Mobile & Supabase Integration
+
+**When stack includes `expo` or `react-native`:**
+
+Invoke relevant Expo skills:
+- `expo-app-design:building-native-ui` - Navigation, components, styling
+- `expo-app-design:native-data-fetching` - API calls, caching, offline
+- `expo-app-design:expo-api-routes` - Server routes with EAS
+- `expo-app-design:expo-dev-client` - Dev builds, TestFlight
+- `expo-app-design:use-dom` - Web code in native webviews
+- `expo-app-design:expo-tailwind-setup` - NativeWind styling
+- `upgrading-expo:upgrading-expo` - SDK version upgrades
+
+**When stack includes `supabase`:**
+
+Use Supabase MCP tools (via ToolSearch):
+- `mcp__plugin_supabase_supabase__execute_sql` - Run queries
+- `mcp__plugin_supabase_supabase__apply_migration` - Schema changes
+- `mcp__plugin_supabase_supabase__list_tables` - Explore schema
+- `mcp__plugin_supabase_supabase__get_project_url` - Get connection info
+- `mcp__plugin_supabase_supabase__deploy_edge_function` - Deploy functions
 
 ## Skill Invocation Requirements
 
@@ -182,6 +222,12 @@ Transition when: Merged OR awaiting human approval
 - `superpowers:systematic-debugging` - When encountering bugs
 - `superpowers:test-driven-development` - When writing new features
 - `superpowers:verification-before-completion` - Before claiming done
+
+**For mobile projects (Expo/React Native):**
+
+- `expo-app-design:building-native-ui` - UI components, navigation, tabs
+- `expo-app-design:native-data-fetching` - Network requests, data loading
+- `expo-app-design:expo-dev-client` - Building and testing on devices
 
 ## Error Handling
 

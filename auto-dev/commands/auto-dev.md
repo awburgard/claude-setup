@@ -58,6 +58,27 @@ Execute the plan task by task. Use specialist delegation based on complexity:
 | Performance optimization | `database-optimizer` or `dx-optimizer` |
 | Frontend UI/UX | `frontend-developer` or `ui-designer` |
 | Backend logic | `backend-developer` |
+| **Mobile/Expo navigation** | `mobile-developer` or `mobile-app-developer` |
+| **Expo-specific features** | Use `expo-app-design:*` skills |
+| **React Native components** | `mobile-developer` |
+| **Supabase integration** | Use Supabase MCP tools |
+
+#### Mobile Development Skills
+
+When the detected stack includes `expo`, `react-native`, or `supabase`:
+
+**Expo Skills (invoke when applicable):**
+- `expo-app-design:building-native-ui` - Native UI components, navigation, styling
+- `expo-app-design:native-data-fetching` - API calls, React Query, offline support
+- `expo-app-design:expo-api-routes` - API routes with EAS Hosting
+- `expo-app-design:expo-dev-client` - Development builds and TestFlight
+- `expo-app-design:use-dom` - DOM components for web code on native
+- `expo-app-design:expo-tailwind-setup` - Tailwind CSS with NativeWind
+
+**Supabase Integration:**
+- Use `mcp__plugin_supabase_supabase__*` tools for database operations
+- `execute_sql` for queries, `apply_migration` for schema changes
+- `get_project_url` and `get_publishable_keys` for client setup
 
 **Complexity Thresholds:**
 - Score 1-3: Handle directly, minimal delegation
