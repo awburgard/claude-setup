@@ -1,0 +1,19 @@
+# {{project-name}}
+
+{{one-paragraph-description}}
+
+## Stack
+
+Per `~/.claude/CLAUDE.md` (default stack). Deviations from default (if any) documented as ADRs under `docs/adr/`.
+
+## Project-specific overrides
+
+- Observability: {{observability_mode}}  <!-- "default" | "none" -->
+- Path-scoped rules under `.claude/rules/` (if present) take precedence over `~/.claude/rules/`.
+
+## Onboarding
+
+- `pnpm install`
+- Set Wrangler secrets per env (see `RUNBOOK.md`).
+- `pnpm dev` for local development.
+- `/explore` for the first initiative.

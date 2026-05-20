@@ -1,0 +1,44 @@
+# {{project-name}} — RUNBOOK
+
+## Deploy
+
+```
+pnpm typecheck && pnpm lint && pnpm test
+pnpm deploy:preview              # to preview env
+gh pr create ...                 # via /pr-create
+# (on merge) GHA deploys to production via the Main workflow.
+```
+
+## Rollback
+
+```
+wrangler rollback --env production --message "..."
+```
+
+Migrations are append-only — to "roll back" a migration, generate a new compensating migration.
+
+## Key rotation
+
+Supabase:
+1. Generate new `sb_secret_*` in Supabase dashboard.
+2. `wrangler secret put SUPABASE_SECRET_KEY --env production` (paste new value).
+3. Update preview env similarly.
+4. Revoke the old key in Supabase dashboard.
+
+Sentry / OpenAI / Anthropic / Stripe / etc:
+- Same pattern via `wrangler secret put ... --env <env>` and revoke after deploy.
+
+## Oncall
+
+- `/healthz` for the API: `https://<host>/healthz`
+- Worker logs: `wrangler tail --env production`
+- Sentry: <link>
+- Langfuse (if observability default-on): <link>
+- Supabase status: <link>
+
+## Quarterly checklist
+
+- [ ] `pnpm outdated` review
+- [ ] `pnpm audit` review
+- [ ] `/docs-audit` (auto-fires; just read the report)
+- [ ] Key rotation if >12 months since last rotation

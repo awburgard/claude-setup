@@ -1,22 +1,172 @@
 {
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-secrets-commit.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-push-to-main.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-wrong-package-manager.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-prod-writes.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-irreversible-git.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-pr-without-review.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-pr-typecheck-lint.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-mobile-native-add.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-named-script.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-migration-edit.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-test-edit-tripwire.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-context7-on-config.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-pgtable-without-rls.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-service-role-in-user-paths.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-dangerous-primitives.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-anonymous-types.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-class-outside-allowlist.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-unwrap-outside-tests.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-throw-outside-programmer-errors.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-as-cast-branded-ids.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-mutation-audit.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-await-in-loop.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-ai-call-without-telemetry.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-anthropic-sdk-escape.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-asyncstorage-token-keys.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-rn-animated.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-request-json-without-parse.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-version-ranges.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-compatibility-date.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-prod-env-config.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-adr-trigger.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/nudge-doc-status-frontmatter.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/session-start-audit-nudge.sh"
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
-    "feature-dev@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true,
-    "ralph-loop@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "commit-commands@claude-plugins-official": true,
-    "security-guidance@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
-    "pr-review-toolkit@claude-plugins-official": true,
-    "supabase@claude-plugins-official": true,
-    "figma@claude-plugins-official": true,
-    "atlassian@claude-plugins-official": true,
-    "greptile@claude-plugins-official": true,
-    "expo-app-design@expo-plugins": true,
-    "upgrading-expo@expo-plugins": true,
-    "agent-sdk-dev@claude-plugins-official": true,
-    "plugin-dev@claude-plugins-official": true
-  }
+    "supabase@claude-plugins-official": true
+  },
+  "effortLevel": "xhigh",
+  "theme": "auto",
+  "skipAutoPermissionPrompt": true,
+  "_comment": "User-level Claude Code settings. Hooks wire the 33-hook tripwire layer. Mirror under <project>/.claude/settings.json for team-portable handoff."
 }
